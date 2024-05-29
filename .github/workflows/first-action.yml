@@ -1,5 +1,8 @@
 name: First Action Pipeline
-on: [push]
+on: 
+  push:
+    branches:
+      - develop
 
 jobs:
   build:
