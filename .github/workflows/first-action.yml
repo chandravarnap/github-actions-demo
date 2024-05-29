@@ -1,1 +1,27 @@
+name: First Action Pipeline
+on: [push]
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.8,3.9]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: set up python env
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{matrix.python-version}}
+    - name: install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+
+    - name: Run test
+      run: |
+        cd src
+        python -m pytest app.py
+        
